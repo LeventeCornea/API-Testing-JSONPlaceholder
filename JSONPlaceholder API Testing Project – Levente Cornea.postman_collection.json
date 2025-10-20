@@ -1,0 +1,404 @@
+{
+	"info": {
+		"_postman_id": "0413d9b5-d4d9-464b-bc12-da6c1420e90b",
+		"name": "JSONPlaceholder API Testing Project – Levente Cornea",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39207656"
+	},
+	"item": [
+		{
+			"name": "All Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));\r",
+							"pm.test(\"Response is an array\", () => pm.expect(pm.response.json()).to.be.an('array'));\r",
+							"pm.test(\"Each user has an id\", () => {\r",
+							"    pm.response.json().forEach(user => pm.expect(user).to.have.property('id'));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Single User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));\r",
+							"pm.test(\"User has name and email\", () => {\r",
+							"    const user = pm.response.json();\r",
+							"    pm.expect(user).to.have.property('name');\r",
+							"    pm.expect(user).to.have.property('email');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/users/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", () => pm.response.to.have.status(201));\r",
+							"pm.test(\"Response contains id\", () => pm.expect(pm.response.json()).to.have.property('id'));\r",
+							"pm.test(\"Response has correct name\", () => pm.expect(pm.response.json().name).to.eql(\"John Doe\"));\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"username\": \"johnd\",\r\n  \"email\": \"john@example.com\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));\r",
+							"pm.test(\"Updated name is Jane Doe\", () => pm.expect(pm.response.json().name).to.eql(\"Jane Doe\"));\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Jane Doe\",\r\n  \"username\": \"janed\",\r\n  \"email\": \"jane@example.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/users/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"PATCH request executed successfully\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"newemail@example.com\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/users/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 or 204\", () => pm.expect([200, 204]).to.include(pm.response.code));"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"newemail@example.com\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/users/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Posts for a User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));\r",
+							"pm.test(\"Posts array is not empty\", () => pm.expect(pm.response.json().length).to.be.above(0));\r",
+							"pm.test(\"Each post has userId\", () => {\r",
+							"    pm.response.json().forEach(post => pm.expect(post).to.have.property('userId'));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"newemail@example.com\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/users/1/posts",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", () => pm.response.to.have.status(201));\r",
+							"pm.test(\"Post has id\", () => pm.expect(pm.response.json()).to.have.property('id'));\r",
+							"pm.test(\"Title is correct\", () => pm.expect(pm.response.json().title).to.eql(\"QA Test Post\"));\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 1,\r\n  \"title\": \"QA Test Post\",\r\n  \"body\": \"This is a post created for API testing.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/posts",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Non-Existent User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", () => pm.response.to.have.status(404));\r",
+							"pm.test(\"Response is empty object\", () => pm.expect(pm.response.json()).to.eql({}));\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/users/9999",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users",
+						"9999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201 (JSONPlaceholder allows invalid data)\", () => pm.response.to.have.status(201));\r",
+							"pm.test(\"Response contains the sent data\", () => {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.userId).to.eql(\"invalid_id\");\r",
+							"    pm.expect(response.body).to.eql(12345);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": \"invalid_id\",\r\n  \"title\": \"\",\r\n  \"body\": 12345\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/posts",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
