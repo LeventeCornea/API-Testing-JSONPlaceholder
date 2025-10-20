@@ -7,7 +7,7 @@ It validates GET, POST, PUT, and DELETE endpoints with **test scripts written in
 
 Tools: Postman, JavaScript (for test scripts), Git & GitHub.  
 
-All requests are organized in the **collection file** located in the `collections` folder:  
+All test requests are included in the collection file (`collections/JSONPlaceholder API Testing Project – Levente Cornea.postman_collection.json). 
 Test results can be viewed in Postman's **Test Results** panel after executing the requests. Screenshots or observations can be added to the README to showcase results. Future CI/CD integration using GitHub Actions will automate these API tests.
 
 **Author:** Levente Cornea
