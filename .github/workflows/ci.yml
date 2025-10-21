@@ -1,4 +1,4 @@
-name: Validate Postman Collection
+name: Validate Postman Project Files
 
 on:
   push:
@@ -12,18 +12,31 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Verify Postman collection exists
+      - name: Check Postman collection file
         run: |
           echo "🔍 Checking for Postman collection file..."
-          if [ -f "collections/JSONPlaceholder API Testing Project – Levente Cornea.postman_collection.json" ]; then
-            echo "✅ Collection file found successfully!"
+          COLLECTION_PATH="collections/JSONPlaceholder API Testing Project - Levente Cornea.postman_collection.json"
+          if [ -f "$COLLECTION_PATH" ]; then
+            echo "✅ Collection file found: $COLLECTION_PATH"
           else
-            echo "❌ Collection file missing. Please add it under /collections/"
+            echo "❌ Missing Postman collection file."
             exit 1
           fi
 
-      - name: Display project info
+      - name: Check Postman environment file
         run: |
-          echo "📘 Project: JSONPlaceholder API Testing – Levente Cornea"
-          echo "✔️ Postman GUI used for API test creation and execution."
-          echo "✔️ CI validated collection presence only (no CLI test run)."
+          echo "🔍 Checking for Postman environment file..."
+          ENV_PATH="environments/JSONPlaceholder_Environment.postman_environment.json"
+          if [ -f "$ENV_PATH" ]; then
+            echo "✅ Environment file found: $ENV_PATH"
+          else
+            echo "❌ Missing Postman environment file."
+            exit 1
+          fi
+
+      - name: Display project information
+        run: |
+          echo "📘 Project: JSONPlaceholder API Testing - Levente Cornea"
+          echo "✔️ Postman GUI used for API automation (no CLI dependencies)."
+          echo "✔️ CI verifies the presence of both collection and environment files."
+          echo "✔️ Files are ready for import into Postman for local or demo execution."
