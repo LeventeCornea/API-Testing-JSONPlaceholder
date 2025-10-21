@@ -1,29 +1,21 @@
-name: Postman API Tests
+name: Run Postman Tests
 
 on:
   push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
 
 jobs:
-  test:
+  run-tests:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
       - name: Install Postman CLI
-        run: npm install -g postman
-
-      - name: Install Newman
-        run: npm install -g newman
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
 
       - name: Run Postman collection
-        run: postman collection run "collections/JSONPlaceholder API Testing Project – Levente Cornea.postman_collection.json"
+        run: |
+          postman collection run "collections/JSONPlaceholder API Testing Project – Levente Cornea.postman_collection.json"
