@@ -14,29 +14,29 @@ jobs:
 
       - name: Verify Postman collection file
         run: |
-          echo "🔍 Checking for Postman collection file..."
-          COLLECTION_PATH="JSONPlaceholder API Testing Project – Levente Cornea.postman_collection.json"
+          echo "Checking for Postman collection file..."
+          COLLECTION_PATH="JSONPlaceholder API Testing Project - Levente Cornea.postman_collection.json"
           if [ -f "$COLLECTION_PATH" ]; then
-            echo "✅ Collection file found: $COLLECTION_PATH"
+            echo "Collection file found: $COLLECTION_PATH"
           else
-            echo "❌ Missing Postman collection file."
+            echo "Missing Postman collection file."
             exit 1
           fi
 
       - name: Verify Postman environment file
         run: |
-          echo "🔍 Checking for Postman environment file..."
+          echo "Checking for Postman environment file..."
           ENV_PATH="JSONPlaceholder_Environment.postman_environment.json"
           if [ -f "$ENV_PATH" ]; then
-            echo "✅ Environment file found: $ENV_PATH"
+            echo "Environment file found: $ENV_PATH"
           else
-            echo "❌ Missing Postman environment file."
+            echo "Missing Postman environment file."
             exit 1
           fi
 
       - name: Display project information
         run: |
-          echo "📘 Project: JSONPlaceholder API Testing – Levente Cornea"
-          echo "✔️ Postman GUI used for API testing (no CLI needed)."
-          echo "✔️ Collection and environment files verified."
-          echo "✔️ Files ready for local import or demonstration."
+          echo "Project: JSONPlaceholder API Testing - Levente Cornea"
+          echo "Postman GUI used for API testing (no CLI needed)."
+          echo "Collection and environment files verified."
+          echo "Files ready for local import or demonstration."
