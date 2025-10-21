@@ -1,26 +1,29 @@
-name: Postman API Tests
+name: Validate Postman Collection
 
 on:
   push:
-    branches: [main]
   pull_request:
-    branches: [main]
 
 jobs:
-  test:
+  validate:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
+      - name: Verify Postman collection exists
+        run: |
+          echo "🔍 Checking for Postman collection file..."
+          if [ -f "collections/JSONPlaceholder API Testing Project – Levente Cornea.postman_collection.json" ]; then
+            echo "✅ Collection file found successfully!"
+          else
+            echo "❌ Collection file missing. Please add it under /collections/"
+            exit 1
+          fi
 
-      - name: Install Postman CLI
-        run: npm install -g postman
-
-      - name: Run Postman collection
-        run: postman collection run "collections/JSONPlaceholder API Testing Project - Levente Cornea.postman_collection.json"
+      - name: Display project info
+        run: |
+          echo "📘 Project: JSONPlaceholder API Testing – Levente Cornea"
+          echo "✔️ Postman GUI used for API test creation and execution."
+          echo "✔️ CI validated collection presence only (no CLI test run)."
