@@ -7,7 +7,21 @@ It validates GET, POST, PUT, and DELETE endpoints with **test scripts written in
 
 Tools: Postman, JavaScript (for test scripts), Git & GitHub.  
 
-All test requests are included in the collection file (`collections/JSONPlaceholder API Testing Project – Levente Cornea.postman_collection.json). 
-Test results can be viewed in Postman's **Test Results** panel after executing the requests. Screenshots or observations can be added to the README to showcase results. Future CI/CD integration using GitHub Actions will automate these API tests.
+All test requests are included in the collection file: 
+`collections/JSONPlaceholder API Testing Project – Levente Cornea.postman_collection.json
+Test results can be viewed in Postman's **Test Results** panel after executing the requests. Screenshots or observations can be added to the README to showcase results.
+
+## ⚙️ CI/CD Integration
+
+This project includes a **GitHub Actions workflow** that automatically validates the Postman collection setup on each push or pull request.  
+The workflow file is located at:
+.github/workflows/ci.yml
+
+The pipeline:
+- Sets up the Node.js environment.  
+- Verifies the presence and structure of the Postman collection.  
+- Confirms that the repository is ready for automated API testing integration.  
+- Displays results directly in the **Actions** tab on GitHub.
+  
 
 **Author:** Levente Cornea
