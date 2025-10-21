@@ -12,10 +12,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check Postman collection file
+      - name: Verify Postman collection file
         run: |
           echo "🔍 Checking for Postman collection file..."
-          COLLECTION_PATH="collections/JSONPlaceholder API Testing Project - Levente Cornea.postman_collection.json"
+          COLLECTION_PATH="collections/JSONPlaceholder API Testing Project – Levente Cornea.postman_collection.json"
           if [ -f "$COLLECTION_PATH" ]; then
             echo "✅ Collection file found: $COLLECTION_PATH"
           else
@@ -23,7 +23,7 @@ jobs:
             exit 1
           fi
 
-      - name: Check Postman environment file
+      - name: Verify Postman environment file
         run: |
           echo "🔍 Checking for Postman environment file..."
           ENV_PATH="environments/JSONPlaceholder_Environment.postman_environment.json"
@@ -36,7 +36,7 @@ jobs:
 
       - name: Display project information
         run: |
-          echo "📘 Project: JSONPlaceholder API Testing - Levente Cornea"
-          echo "✔️ Postman GUI used for API automation (no CLI dependencies)."
-          echo "✔️ CI verifies the presence of both collection and environment files."
-          echo "✔️ Files are ready for import into Postman for local or demo execution."
+          echo "📘 Project: JSONPlaceholder API Testing – Levente Cornea"
+          echo "✔️ Postman GUI used for API testing (no CLI needed)."
+          echo "✔️ Collection and environment files verified."
+          echo "✔️ Files ready for local import or demonstration."
