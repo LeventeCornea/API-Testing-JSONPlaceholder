@@ -15,7 +15,7 @@ jobs:
       - name: Verify Postman collection file
         run: |
           echo "🔍 Checking for Postman collection file..."
-          COLLECTION_PATH="collections/JSONPlaceholder API Testing Project – Levente Cornea.postman_collection.json"
+          COLLECTION_PATH="JSONPlaceholder API Testing Project – Levente Cornea.postman_collection.json"
           if [ -f "$COLLECTION_PATH" ]; then
             echo "✅ Collection file found: $COLLECTION_PATH"
           else
@@ -26,7 +26,7 @@ jobs:
       - name: Verify Postman environment file
         run: |
           echo "🔍 Checking for Postman environment file..."
-          ENV_PATH="environments/JSONPlaceholder_Environment.postman_environment.json"
+          ENV_PATH="JSONPlaceholder_Environment.postman_environment.json"
           if [ -f "$ENV_PATH" ]; then
             echo "✅ Environment file found: $ENV_PATH"
           else
